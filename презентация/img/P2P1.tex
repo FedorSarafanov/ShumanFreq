@@ -1,0 +1,73 @@
+\documentclass[tikz]{standalone}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\begin{document}
+	\begin{tikzpicture}
+		    \begin{axis}[
+			grid=both,
+			scale=1.5,
+			% xmode=log,
+			grid style={line width=.1pt, draw=gray!10},
+			major grid style={line width=.2pt,draw=gray!50},
+			% axis lines=middle,
+			% minor tick num=5,
+			% xmin=1000, 
+			% xmax=11,
+			% ymin=0,
+			% ymax=5,
+			xlabel={Мощность накачки -- волоконного лазера $P_1$, Вт},
+			ylabel={Мощность генерации лазера на керамике $P_2$, Вт},
+			tick style={very thick},
+		    % scale=0.5,
+		    grid=both,
+		    grid style={line width=1pt, draw=black!20},
+		    major grid style={line width=.5pt,draw=black!90},
+		    % minor y tick num=4,
+		    % minor x tick num=4,   
+		     % xmode=log,
+		    xmode=normal,ymode=normal,
+		    % xtick distance=0.5,
+		    ytick distance=1,
+		    ymax = 9,
+		    % xmin = 2,
+		    xmax = 35,
+		    ymin = 0,
+		    % ymax = 9,
+		    legend pos=north west,
+		    % unit vector ratio*=10 1 1,
+		]
+
+		\addplot +[mark=*, mark options={magenta}, mark size=2.5pt, only marks] plot [error bars/.cd, y dir = both, y explicit] table 
+		[
+		    create on use/P2/.style={
+		        create col/expr={
+		        	(\thisrow{left}+\thisrow{right})/2
+		        }
+		    },	
+		    create on use/dP2/.style={
+		        create col/expr={
+		        	abs(\thisrow{left}-\thisrow{right})/2
+		        }
+		    },	
+			x=P1, 
+			y=P2, 
+			% y error=dP2
+		] 
+		{P2I2.tsv};
+
+		 % \addlegendentry{Экспериментальные данные}
+		    % \addplot[draw=none] table[y={create col/linear regression={y=P2}}] % compute a linear regression from the
+		    %input table
+		    % {P2.tsv};
+
+
+		\addplot [samples=100, thick, dashed, domain=13:33, black] {0.3814*x-3.9};
+		    % \addlegendentry{%
+		        % $P_2$=$\pgfmathprintnumber{\pgfplotstableregressiona} \cdot I
+		        % \pgfmathprintnumber[print sign]{\pgfplotstableregressionb}$ Аппроксимация} %		
+		    \end{axis}
+		\end{tikzpicture}	
+\end{document}

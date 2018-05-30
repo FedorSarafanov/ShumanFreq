@@ -1,0 +1,111 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[english,russian]{babel}
+\usepackage[T2A,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\input{tikz.tex}
+\usepackage
+    {
+        tikz,
+        pgfplots,
+        verbatim,
+    }
+\usetikzlibrary
+    {
+        arrows,
+        patterns,
+        angles,
+        quotes,
+        calc, 
+        3d,  
+        backgrounds, 
+        positioning
+    }
+\usetikzlibrary{fadings,through}
+\tikzset
+    {
+        media/.style={font={\footnotesize\sffamily}},
+        wave/.style={
+            decorate,decoration={snake,post length=1.4mm,amplitude=2mm,
+                segment length=1mm},thick},   
+    }
+\begin{document}
+\begin{tikzpicture}
+	% \xdef\darkness{0}
+	% \xdef\op{0.1}
+
+	% \xdef\SIZE{10}
+
+	% \draw[step=1.0,blue,thick,opacity=\op] (0,0) grid (\SIZE,\SIZE);
+	% \draw[step=0.5,blue,very thin,opacity=\op] (0,0) grid (\SIZE,\SIZE);
+
+	% \foreach \i in {0,1,...,\SIZE} {
+ %    	\draw[opacity=\op] (0,\i) node [left] {\i};
+ %    	\draw[opacity=\op] (\i,0) node [below] {\i};
+ %    }
+
+
+    \draw [thick] (0,0) node [left] {$E_1$} -- ++(3,0);
+    \draw [thick] (0,2.5) node [left] {$E_2$} -- ++(3,0);
+    \draw [interface] (0,4) node [left] {$E_3$} rectangle ++(3,00);
+    \draw [thick] (0,4) -- ++(3,0);
+
+    \draw [very thick, ->, gray] (0.5,0) -- node [below, pos=0.3,sloped, black]{накачка} ++(0,4);
+    \draw [line width=1pt, ->] (2,2.5)  --  node [below, rotate=180, pos=0.5,sloped]{генерация} (2,0);
+
+	\foreach \i in {1.5,2,2.5} {
+	\draw [decorate, decoration={snake}, ->] (\i,4) --
+    node [below,sloped]{} ++(0,-1.5); 
+    }
+
+
+\end{tikzpicture} 
+\end{document}
+
+
+ %    % resonator
+ %    \draw [fill=black!\darkness] (5,0) rectangle ++(0.25,1);
+ %    \coordinate (res-right-right) at (5.25,0.5);
+ %    \coordinate (res-right-left) at (5,0.5);
+ %    \coordinate (res-right) at (5.12,0.5);    
+
+
+ %    \draw [fill=black!10] (3,0) rectangle ++(-0.25,1);
+ %    \coordinate (res-left-left) at (2.75,0.5);
+ %    \coordinate (res-left-right) at (3,0.5);    
+ %    \coordinate (res-left) at (2.87,0.5);    
+
+ %    \coordinate (pol1) at (0.5,0.5);    
+ %    \coordinate (pol2) at (0.5,2.5);    
+
+ %    % forward wave
+ %    \draw[line width=2pt,magenta] 
+ %    	% (LAS1-left) -- (res-right-right)
+ %    	(res-right-left) -- (res-left-right)
+ %    	(res-right-right) -- ++(0.5,0)
+ %    	% (res-left-left) -- (pol1) 
+ %    	% (pol1) -- ++ (-2,0) node [left, black] {накачка}
+ %    ;
+
+ %    % environment 
+ %    \draw[fill=black!30, opacity=0.5] (3.5, 0) rectangle (4.5,1);
+ %    \coordinate (env) at (4,0.5);
+
+ %    %caption
+
+ %    % \draw (pol1) node [left, yshift=-1em] {$4a$};
+ %    % \draw (pol2) node [right, yshift=1em] {$4b$};
+
+ %    \draw (res-right) node [ yshift=2em] {$4$};
+ %    \draw (res-left) node [ yshift=2em] {$3$}; 
+
+ %    \draw (env) node [yshift=2em] {$1$};    
+ %    % \draw (LAS1) node [yshift=2em] {$1$};    
+ %    % \draw (CAM1) node [yshift=2em] {$5$};    
+
+	% \foreach \i in {3.8,3.9,...,4.2} {
+ %    	\draw[red,->] (\i-0.5,-0.5) -- (\i,0);
+ %    }    
+
+ %    \node (a) at (3.5,-0.7) {2};
+

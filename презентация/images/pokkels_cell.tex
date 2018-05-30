@@ -1,0 +1,75 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[english,russian]{babel}
+\usepackage[T2A,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usetikzlibrary{fit}
+\usepackage
+    {
+        tikz,
+        pgfplots,
+        verbatim,
+    }
+\usetikzlibrary
+    {
+        arrows,
+        patterns,
+        angles,
+        quotes,
+        calc, 
+        3d,  
+        backgrounds, 
+        positioning
+    }
+\usetikzlibrary{fadings,through}
+\tikzset
+    {
+        media/.style={font={\footnotesize\sffamily}},
+        wave/.style={
+            decorate,decoration={snake,post length=1.4mm,amplitude=2mm,
+                segment length=1mm},thick},   
+    }
+\begin{document}
+\begin{tikzpicture}
+    \xdef\darkness{0}
+	\xdef\opa{0.2}
+
+	\xdef\SIZE{6}
+
+	\draw[step=1.0,blue,thick, opacity=\opa] (0,0) grid (\SIZE,\SIZE);
+	\draw[step=0.5,blue,very thin, opacity=\opa] (0,0) grid (\SIZE,\SIZE);
+
+	\foreach \i in {0,1,...,\SIZE} {
+    	\draw (0,\i) node [left,  opacity=\opa] {\i};
+    	\draw (\i,0) node [below,  opacity=\opa] {\i};
+    }
+
+
+    \node [draw, shape=rectangle, fill=white, minimum width=0.25cm, minimum height=1cm, anchor=center] at (0,0.5) (res1) {};
+    \node [draw, shape=rectangle, fill=white, minimum width=0.25cm, minimum height=1cm, anchor=center] at (3,0.5) (res2) {};
+
+    \coordinate (envplace) at ($(res1.east)!0.2!(res2.west)$);
+    \coordinate (polplace) at ($(res1.east)!0.5!(res2.west)$);
+    \coordinate (pokplace) at ($(res1.east)!0.8!(res2.west)$);
+
+
+
+
+    % \node[fit={(5,0) (5.25,1)}, rotate around={-25:(res2.west)}, inner sep=0pt, draw=black, dashed] (res2) {};
+
+    % \draw[magenta, line width=1pt, dashed] (res2.west) -- ++(90+25:1);
+
+    % forward wave
+    \draw[line width=1pt,magenta] 
+        (res1.east) -- (res2.west)
+    ;
+
+    \node [draw, shape=rectangle, fill=magenta!65, opacity=0.5, minimum width=0.4cm, minimum height=0.4cm, anchor=center] at (envplace) (env) {};
+
+    \node [draw, shape=rectangle, fill=white, minimum width=0.6cm, minimum height=0.6cm, anchor=center] at (polplace) (pol) {};
+    \draw (pol.south west)--(pol.north east);
+
+    \node [draw, shape=rectangle, fill=white, minimum width=0.6cm, minimum height=0.6cm, anchor=center] at (pokplace) (pok) {cell};
+
+\end{tikzpicture} 
+\end{document}

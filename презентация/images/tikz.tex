@@ -1,0 +1,53 @@
+\tikzset{
+	force/.style=	{
+		>=latex,
+		draw=blue,
+		fill=blue,
+				 	}, 
+	%				 	
+	axis/.style=	{
+		densely dashed,
+		blue,
+		line width=1pt,
+		font=\small,
+					},
+	%
+	th/.style=	{
+		line width=1pt},
+	%
+	acceleration/.style={
+		>=open triangle 60,
+		draw=magenta,
+		fill=magenta,
+					},
+	%
+	inforce/.style=	{
+		force,
+		double equal sign distance=2pt,
+					},
+	%
+	interface/.style={
+		pattern = north east lines, 
+		draw    = none, 
+		pattern color=gray!60,
+					},
+	cross/.style=	{
+		cross out, 
+		draw=black, 
+		minimum size=2*(#1-\pgflinewidth), 
+		inner sep=0pt, outer sep=0pt,
+					},
+	%
+	cargo/.style=	{
+		rectangle, 
+		fill=black!70, 
+		inner sep=2.5mm,
+					},
+	%
+	caption/.style= {
+		midway,
+		fill=white!20, 
+		opacity=0.9
+					},
+	%
+	}

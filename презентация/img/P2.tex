@@ -1,0 +1,63 @@
+\documentclass[tikz]{standalone}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\begin{document}
+	\begin{tikzpicture}
+		    \begin{axis}[
+			grid=both,
+			scale=1.5,
+			% xmode=log,
+			grid style={line width=.1pt, draw=gray!10},
+			major grid style={line width=.2pt,draw=gray!50},
+			% axis lines=middle,
+			% minor tick num=5,
+			% xmin=1000, 
+			% xmax=11,
+			% ymin=0,
+			% ymax=5,
+			xlabel={$I$, А},
+			ylabel={$P$, Вт},
+			tick style={very thick},
+		    % scale=0.5,
+		    grid=both,
+		    grid style={line width=1pt, draw=black!20},
+		    major grid style={line width=.5pt,draw=black!90},
+		    minor y tick num=4,
+		    minor x tick num=4,   
+		     % xmode=log,
+		    xmode=normal,ymode=normal,
+		    xtick distance=0.5,
+		    ytick distance=5,
+		    % ymax = 1.8,
+		    xmin = 2,
+		    xmax = 6,
+		    ymin = 0,
+		    ymax = 20,
+		    legend pos=north west,
+		    unit vector ratio*=10 1 1,
+		]
+
+		\addplot +[mark=*, mark size=1.5pt, only marks] plot [error bars/.cd, y dir = both, y explicit] table 
+		[
+			x=I, 
+			y=P2, 
+			y error=dP2
+		] 
+		{P2.tsv};
+
+		 \addlegendentry{Экспериментальные данные}
+		    \addplot[draw=none] table[y={create col/linear regression={y=P2}}] % compute a linear regression from the
+		    %input table
+		    {P2.tsv};
+
+
+		\addplot [samples=100, domain=0:6, red] {\pgfplotstableregressiona*x+\pgfplotstableregressionb};
+		    \addlegendentry{%
+		        P=$\pgfmathprintnumber{\pgfplotstableregressiona} \cdot I
+		        \pgfmathprintnumber[print sign]{\pgfplotstableregressionb}$ Аппроксимация} %		
+		    \end{axis}
+		\end{tikzpicture}	
+\end{document}
